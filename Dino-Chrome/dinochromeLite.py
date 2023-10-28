@@ -2,53 +2,49 @@ from kandinsky import *
 from random import * 
 from ion import *
 from time import *
-
-fill_rect(0,0,320,240, color(32,33,36))
-
-colors=[color(32,33,36),color(172,172,172),color(116,116,116)]
-fill_rect(0,160,320,2, color[1])
-#Player position
+def F(x,y,w,h,c): # draw shape
+    fill_rect(x,y,w,h,c)
+F(0,0,320,240, color(32,33,36))
+c=[color(32,33,36),color(172,172,172),color(116,116,116)]
+F(0,160,320,2, color(172,172,172))
 x=24.0
 y=129
-
 JumpForce=32
 pY=0
-
 cactusYPos=124
-
-cactus=[]#liste of all cactus 
-clouds=[]#liste of all clouds 
+cactus=[]
+clouds=[]
 
 s=8
 
 timer = 0
 spawnTime = uniform(35,75)
-def DrawSprite(r,X,Y): # draw sprite 
+def ds(r,X,Y): # draw sprite 
     for i in range(len(r)):
-        fill_rect(int(r[i][0]*4+X),int(r[i][1]*4+Y),int(r[i][2]*4),int(r[i][3]*4),colors[r[i][4]])
+        F(int(r[i][0]*4+X),int(r[i][1]*4+Y),int(r[i][2]*4),int(r[i][3]*4),c[r[i][4]])
         
 def D():
     r = [(2,6,1,2,1),(1,6,1,1,2),(1,7,1,1,0),(0,5,6,2,1),(0,3,1,2,1),(4,1,2,4,1),(6,1,3,3,1),(5,2,1,1,0)]
-    DrawSprite(r,x,y)
+    ds(r,x,y)
 
 def d():
     r=[(2,6,1,1,1),(1,6,1,2,2),(2,7,1,1,0),(0,5,6,2,1),(0,3,1,2,1),(4,1,2,4,1),(6,1,3,3,1),(5,2,1,1,0),]
-    DrawSprite(r,x,y)
+    ds(r,x,y)
 
 def r():
     r = [(2,6,1,2,0),(1,6,1,2,0),(0,5,6,2,0),(0,3,1,2,0),(4,1,2,4,0),(6,1,3,3,0),(5,2,1,1,0)]
-    DrawSprite(r,x,y)
+    ds(r,x,y)
 
 def draw_cac(i):
     r = [(4,0,2,10,1),(2,2,1,6,1),(7,3,1,5,1),(2,6,6,2,1)]
-    DrawSprite(r, cactus[i], 124)
+    ds(r, cactus[i], 124)
 
 def drawCloud(i):
     r = [(0,5,8,2,1),(1,4,6,1,1),(2,3,2,1,1)]
-    DrawSprite(r,clouds[i], clouds[i+1])
+    ds(r,clouds[i], clouds[i+1])
 def remDrawCloud(i):
     r = [(0,5,8,2,0),(1,4,6,1,0),(2,3,2,1,0)]
-    DrawSprite(r,clouds[i], clouds[i+1])
+    ds(r,clouds[i], clouds[i+1])
 
 def rem_cac(i):
     x=3
@@ -57,7 +53,7 @@ def rem_cac(i):
     else:
         x=4
     r=[(3,2,x,4,0),(6,0,x,6,0),(8,3,x,5,0),(6,8,x,2,0),]
-    DrawSprite(r, cactus[i], 124)
+    ds(r, cactus[i], 124)
 
 
 d()
@@ -83,7 +79,7 @@ while True:
         continue
     if (monotonic()-t) > 1/30: # 30 fps
         # moon
-        DrawSprite([(0,0,5,5,1)], 69, 20)
+        ds([(0,0,5,5,1)], 69, 20)
         
         t=monotonic()
         timer-=1
@@ -117,10 +113,10 @@ while True:
             D()
         sc=int((monotonic()-stMono)*10)
        
-        fill_rect(0,160,320,2,colors[1])
+        F(0,160,320,2,c[1])
         s+=sc/285000
         s=min(s,13)
-        draw_string(str(sc),230,10,colors[1],colors[0])
+        draw_string(str(sc),230,10,c[1],c[0])
 
         #generate clouds
         if randint(0,100) >= 99:
@@ -151,9 +147,9 @@ while True:
             draw_cac(i)      
             if cactus[i] < 45 and cactus[i] > 20:
                 if y > 81:
-                    fill_rect(0,0,320,240, color(32,33,36))
-                    draw_string("GAME OVER",80,120,colors[1],colors[0])
-                    draw_string(str(sc),230,10,colors[1],colors[0])
+                    F(0,0,320,240, color(32,33,36))
+                    draw_string("GAME OVER",80,120,c[1],c[0])
+                    draw_string(str(sc),230,10,c[1],c[0])
                     cactus=[]
                     clouds=[]
                     isDead = True
