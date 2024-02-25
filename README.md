@@ -3,7 +3,7 @@ Here are some games in python that I've made for the numworks
 
 ## Screenshot
 
-![pong](pong.png)
+![pong](Pong.gif)
 ![dino_chrome](dino_chrome.gif)
 ![cloudy_jumpy](cloudy_jumpy.png)
 
