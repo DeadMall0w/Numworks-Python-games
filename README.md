@@ -6,7 +6,7 @@ Here are some games in python that I've made for the numworks
 ![pong](Pong.gif)
 ![dino_chrome](dino_chrome.gif)
 ![Cuadrado](Cuadrado-Gameplay.gif)
-![cloudy_jumpy](cloudy_jumpy.png)
+![cloudy_jumpy](Cloudy_Jumpy.gif)
 
 ## How to use them
 
